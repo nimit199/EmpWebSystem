@@ -16,16 +16,16 @@ namespace EmpWebSystem.Controllers
     {
         public ActionResult Index()
         {
-            var Employees = new Employee();
+            var Employees = new DatabaseList();
 
-            StreamReader jsonFile = new StreamReader("DataBase.json");
+            StreamReader jsonFile = new StreamReader("DataBase.json");  //SAVE DataBase.json in ISS
             var jsonString = jsonFile.ReadToEnd();
 
-            Employees = JsonConvert.DeserializeObject<Employee>(jsonString);
+            Employees = JsonConvert.DeserializeObject<DatabaseList>(jsonString);
 
             var viewModel = new DatabaseViewModel
             {
-                Employees = Employees,
+                DatabaseList = Employees,
             };
 
             return View(viewModel);

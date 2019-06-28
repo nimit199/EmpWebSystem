@@ -15,13 +15,15 @@ THIS IS INDEX VIEW!!!!
         <th>Salary  </th>
     </tr>
 
-    @foreach (var employee in Model.Employees.DataBase)
+    @foreach (var department in Model.DatabaseList.DataBase.Departments)
     {
-<tr>
-    <td>@employee.Department</td>
-    <td>@employee.Name</td>
-    <td>@employee.Salary</td>
-</tr>
+        for(int i=0;i<department.Employees.Length;i++)
+         {
+        <tr>
+            <td>@department.Name</td>
+            <td>@department.Employees[i].Name</td>
+            <td>@department.Employees[i].Salary</td>
+        </tr>
+         }
     }
 </table>
-

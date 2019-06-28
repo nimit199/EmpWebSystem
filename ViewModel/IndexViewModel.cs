@@ -11,7 +11,7 @@ namespace EmpWebSystem.ViewModel
     {
         // public List<Movie> Movie { get; set; }
         // public List<Customer> Customers { get; set; }
-        public Employee Employees{ get; set; }
+        public DatabaseList DatabaseList{ get; set; }
 
     }
 }

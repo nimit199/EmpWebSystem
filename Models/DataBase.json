@@ -1,23 +1,32 @@
 {
-    "DataBase": [
-
-        {
-            "Department": "Dept1",
-            "Name": "Name1",
-            "Salary": "1000"
-        },
-
-        {
-            "Department": "Dept2",
-            "Name": "Name2",
-            "Salary": "2000"
-        },
-
-        {
-            "Department": "Dept3",
-            "Name": "Name3",
-            "Salary": "3000"
-        }
-
-    ]
+    "DataBase": {
+        "Departments": [
+            {
+                "Name": "Dept 1",
+                "Employees": [
+                    {
+                        "Name": "Name 1",
+                        "Salary": 25000
+                    },
+                    {
+                        "Name": "Name 2",
+                        "Salary": 25000
+                    }
+                ]
+            },
+            {
+                "Name": "Dept 2",
+                "Employees": [
+                    {
+                        "Name": "Name 3",
+                        "Salary": 25000
+                    },
+                    {
+                        "Name": "Name 4",
+                        "Salary": 50000
+                    }
+                ]
+            }
+        ]
+    }
 }

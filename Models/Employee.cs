@@ -6,17 +6,26 @@ using Newtonsoft.Json;
 
 namespace EmpWebSystem.Models
 {
-    public class Employee
-    {
-        public Database[] DataBase { get; set; }
+    public class DatabaseList
+{
+        public Database DataBase { get; set; }
     }
 
     public class Database
     {
-        public string Department { get; set; }
-        public string Name { get; set; }
-        public string Salary { get; set; }
-
-
+        public Department[] Departments { get; set; }
     }
+
+    public class Department
+    {
+        public string Name { get; set; }
+        public Employee[] Employees { get; set; }
+    }
+
+    public class Employee
+    {
+        public string Name { get; set; }
+        public int Salary { get; set; }
+    }
+
 }
