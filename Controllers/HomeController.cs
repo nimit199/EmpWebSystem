@@ -69,11 +69,11 @@ namespace EmpWebSystem.Controllers
 
 
         [HttpPost]
-        public ActionResult Create(DatabaseViewModel viewModel)
+        public ActionResult Create(DatabaseViewModel IncomingViewModel)
         {
             var Employees = new DatabaseList();
             StreamWriter jsonFile = new StreamWriter(Server.MapPath("~/Models/DataBase.json"));
-            Employees = viewModel.DatabaseList;
+            Employees = IncomingViewModel.DatabaseList;
             var jsonString = JsonConvert.SerializeObject(Employees);
 
             

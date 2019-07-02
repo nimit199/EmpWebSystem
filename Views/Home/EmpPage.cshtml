@@ -9,44 +9,45 @@
 
 <h2>EmpPage</h2>
 
-@using (Html.BeginForm("Create", "Home"))
+@using (Html.BeginForm("Create", "Home", FormMethod.Post, new {enctype = "multipart/form-data"}))
 {
-    @Html.AntiForgeryToken()
+    Html.AntiForgeryToken();
     int dept = Model.dept - 1;
-    // int deptLength = Model.DatabaseList.DataBase.Departments.Length;
-    // int empLength = Model.DatabaseList.DataBase.Departments[]
+    @*int deptLength = Model.DatabaseList.DataBase.Departments.Length;
+     int empLength = Model.DatabaseList.DataBase.Departments[]*@
     @Html.Label("Department")
     @Html.DropDownListFor(
-        m => m.dept,
-        Model.DepartmentList,
+        m => m.DatabaseList.DataBase.Departments,
+        Model.DatabaseList.DataBase.Departments,
         "Select Department",
-        new { @class = "form-control" }
+        new {@class = "form-control"}
         )
 
 
     if (dept >= 0)
     {
-        <label class = "form-control">Employee ID</label>
+        @Html.Label(m => m.DatabaseList.DataBase.Departments[dept].Employees[Model.id].id)
         @Html.TextBoxFor(m => m.DatabaseList.DataBase.Departments[dept].Employees[Model.id].id)
 
-        <label class = "form-control">Employee Name</label>
+        @Html.Label("Employee Name")
         @Html.TextBoxFor(m => m.DatabaseList.DataBase.Departments[dept].Employees[Model.id].Name)
 
-        <label class = "form-control">Employee Salary</label>
+        @Html.Label("Employee Salary")
         @Html.TextBoxFor(m => m.DatabaseList.DataBase.Departments[dept].Employees[Model.id].Salary)
     }
     else
     {
         @Html.Label(("Employee ID"))
-        @Html.TextBox("Employee ID", "Enter Employee ID", new { @class = "form-control" })
+        @Html.TextBox("Employee ID", "Enter Employee ID", new {@class = "form-control"})
+        
         @Html.Label(("Employee Name"))
-        @Html.TextBox("Employee Name", "Enter Employee Name", new { @class = "form-control" })
+        @Html.TextBox("Employee Name", "Enter Employee Name", new {@class = "form-control"})
+        
         @Html.Label(("Employee Salary"))
-        @Html.TextBox("Employee Salary", "Enter Employee Salary", new { @class = "form-control" })
+        @Html.TextBox("Employee Salary", "Enter Employee Salary", new {@class = "form-control"})
     }
 
     <button type="submit" class="btn btn-primary">Save</button>
-
 }
 @{
     Console.WriteLine("i =" + Model.id + " j/dept " + Model.dept + "Count of DepartmentList" + Model.DepartmentList.Count());
