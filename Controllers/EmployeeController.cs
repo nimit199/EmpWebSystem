@@ -76,7 +76,10 @@ namespace EmpWebSystem.Controllers
 
             var flag = 0;
 
-                foreach (var department in Employees.Database.Departments.ToArray())
+            
+
+
+                    foreach (var department in Employees.Database.Departments.ToArray())
                 {
                     foreach (var employee in department.Employees.ToArray())
                     {
@@ -85,20 +88,33 @@ namespace EmpWebSystem.Controllers
                             employee.Name = viewModel.Employee.Name;
                             employee.Salary = viewModel.Employee.Salary;
                             flag = 1;
+                            break;
                         }
 
                         if (employee.Eid == viewModel.Employee.Eid && employee.Did != viewModel.Employee.Did)
                         {
                             department.Employees.Remove(employee);
                             flag = -1;
+                            break;
                         }
                     }
                 }
-            
 
 
-            if (flag != 1)
-                Employees.Database.Departments[int.Parse(viewModel.Employee.Did) - 1].Employees.Add(viewModel.Employee);
+
+                if (flag != 1)
+                {
+                    foreach (var department in Employees.Database.Departments.ToArray())
+                    foreach (var employee in department.Employees.ToArray())
+                        if (employee.Eid == viewModel.Employee.Eid)
+                        {
+                            //ALLERT
+                            return RedirectToAction("Index", "Home");
+                        }
+
+                    Employees.Database.Departments[int.Parse(viewModel.Employee.Did) - 1].Employees.Add(viewModel.Employee);
+            }
+                
 
             jsonString = JsonConvert.SerializeObject(Employees);
             System.IO.File.WriteAllText(Server.MapPath("~/Models/DataBase.json"), jsonString);
