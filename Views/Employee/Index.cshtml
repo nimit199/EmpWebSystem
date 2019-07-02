@@ -1,0 +1,68 @@
+﻿@using EmpWebSystem.Models
+@model EmpWebSystem.ViewModel.EmployeeViewModel
+@{
+    ViewBag.Title = "Employee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>View for Employee</h2>
+
+
+@using (Html.BeginForm("Create", "Employee"))
+{
+
+    if (Model.Employee == null)
+    {
+    <div class=“form­‐group”>
+        @Html.LabelFor(m => m.Employee.Did)
+        @Html.DropDownListFor(m => m.Employee.Did, 
+            new SelectList(ViewBag.DepartmentList,
+            "Key", "Value"), "Select Department", new { @class = "form-control" })
+        </div>
+
+        <div class=“form­‐group”>
+        @Html.LabelFor(m => m.Employee.Eid)
+        @Html.TextBoxFor(m => m.Employee.Eid,new { @class = "form-control" })
+        </div>
+
+        <div class=“form­‐group”>
+        @Html.LabelFor(m => m.Employee.Name)
+        @Html.TextBoxFor(m => m.Employee.Name, new { @class = "form-control" })
+        </div>
+
+        <div class=“form­‐group”>
+        @Html.LabelFor(m => m.Employee.Salary)
+        @Html.TextBoxFor(m => m.Employee.Salary, new { @class = "form-control" })
+        </div>
+    }
+    else//CODE LEFT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    {
+        <div class=“form­‐group”>
+            @Html.LabelFor(m => m.Employee.Did)
+            @Html.DropDownListFor(m => m.Employee.Did, 
+                new SelectList(ViewBag.DepartmentList,
+                    "Key", "Value"), Model.Employee.Did, new { @class = "form-control" })
+        </div>
+
+        <div class=“form­‐group”>
+            @Html.LabelFor(m => m.Employee.Eid)
+            @Html.TextBoxFor(m => m.Employee.Eid, Model.Employee.Eid,new { @class = "form-control" })
+        </div>
+
+        <div class=“form­‐group”>
+            @Html.LabelFor(m => m.Employee.Name)
+            @Html.TextBoxFor(m => m.Employee.Name, Model.Employee.Name, new { @class = "form-control" })
+        </div>
+
+        <div class=“form­‐group”>
+            @Html.LabelFor(m => m.Employee.Salary)
+            @Html.TextBoxFor(m => m.Employee.Salary,Model.Employee.Salary.ToString(), new { @class = "form-control" })
+        </div>
+    }
+
+
+
+
+
+    <div><button type="submit" class=“btn btn-­primary”>Save</button></div>
+}

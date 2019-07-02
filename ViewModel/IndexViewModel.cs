@@ -10,16 +10,15 @@ namespace EmpWebSystem.ViewModel
 {
     public class DatabaseViewModel
     {
-        // public List<Movie> Movie { get; set; }
-        // public List<Customer> Customers { get; set; }
-        public DatabaseList DatabaseList{ get; set; }
-        public int id { get; set; }
-        public int dept { get; set; }
-
-
-        public List<SelectListItem> DepartmentList { get; set; }
+        public RootModel RootModel{ get; set; }
 
     }
+
+    public class EmployeeViewModel
+    {
+        public Employee Employee { get; set; }
+    }
+
 
    
 
