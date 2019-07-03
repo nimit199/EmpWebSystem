@@ -6,35 +6,44 @@
 }
 
 <h2>Employee List</h2>
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("@ViewBag.Message");
+        };
+    </script>
+}
 
-<table class= "table">
+<table class="table">
     <tr>
-        <th>Edit</th>
-        <th>Department</th>
-        <th>Employee ID</th>
-        <th>Employee Name</th>
-        <th>Salary </th>
+        <td>Edit Information</td>
+        <td>Department</td>
+        <td>Employee ID</td>
+        <td>Employee Name</td>
+        <td>Employee Salary</td>
     </tr>
 
-    @for (int j = 0; j < Model.DatabaseList.DataBase.Departments.Length; j++)
+    @foreach (var department in Model.RootModel.Database.Departments)
     {
-        for (int i = 0; i < Model.DatabaseList.DataBase.Departments[j].Employees.Length; i++)
+//        if (department.Employees == null)
+//        {
+//            continue;
+//        }
+        foreach (var employee in department.Employees)
         {
-<tr>
-    <td>
-        @Html.ActionLink("Edit", "EmpPage", "Home",
-        new
-        {
-            dept = j+1,
-            id = i,
-        },
-        null)
-    </td>
-    <td>@Model.DatabaseList.DataBase.Departments[j].Name</td>
-    <td>@Model.DatabaseList.DataBase.Departments[j].Employees[i].id</td>
-    <td>@Model.DatabaseList.DataBase.Departments[j].Employees[i].Name</td>
-    <td>@Model.DatabaseList.DataBase.Departments[j].Employees[i].Salary</td>
-</tr>
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink("Edit", "Index", "Employee",
+                            new {department.Did, employee.Eid},null)
+                    </td>
+                    <td>@department.Name</td>
+                    <td>@employee.Eid</td>
+                    <td>@employee.Name</td>
+                    <td>@employee.Salary</td>
+                </tr>
+            }
         }
     }
 </table>

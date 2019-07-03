@@ -1,33 +1,33 @@
 {
-    "DataBase": {
+    "Database": {
         "Departments": [
             {
-                "id": "1",
+                "Did": "1",
                 "Name": "Dept 1",
                 "Employees": [
                     {
-                        "id": "1",
+                        "Eid": "1",
                         "Name": "Name 1",
                         "Salary": 25000
                     },
                     {
-                        "id": "2",
+                        "Eid": "2",
                         "Name": "Name 2",
                         "Salary": 25000
                     }
                 ]
             },
             {
-                "id": "2",
+                "Did": "2",
                 "Name": "Dept 2",
                 "Employees": [
                     {
-                        "id": "1",
+                        "Eid": "1",
                         "Name": "Name 3",
                         "Salary": 50000
                     },
                     {
-                        "id": "2",
+                        "Eid": "2",
                         "Name": "Name 4",
                         "Salary": 50000
                     }
