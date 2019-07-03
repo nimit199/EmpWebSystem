@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using EmpWebSystem.Models;
 using EmpWebSystem.ViewModel;
+using Microsoft.Ajax.Utilities;
 using Newtonsoft.Json;
 
 
@@ -17,7 +18,15 @@ namespace EmpWebSystem.Controllers
             Employees = JsonConvert.DeserializeObject<RootModel>(jsonString);
             jsonFile.Close();
 
-
+            if (TempData["shortMessage"] == null)
+            {
+                ViewBag.Message = null;
+            }
+            else
+            {
+                ViewBag.Message = TempData["shortMessage"].ToString();
+            }
+            
 
 
             var viewModel = new DatabaseViewModel

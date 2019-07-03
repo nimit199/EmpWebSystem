@@ -30,33 +30,42 @@ namespace EmpWebSystem.Controllers
             if (Did != null || Eid != null)
             {
                 foreach (var department in Employees.Database.Departments)
+                {
+//                    if (department.Employees == null)
+//                    {
+//                        continue;
+//                    }
+
                     if (department.Did == Did)
-                    {
                         foreach (var employee in department.Employees)
                             if (employee.Eid == Eid)
                             {
                                 curEmp = employee;
                                 curEmp.Did = Did;
                             }
-                    }
+                }
             }
             else
             {
                 curEmp = null;
             }
-                
+
 
             var viewModel = new EmployeeViewModel
             {
                 Employee = curEmp
             };
+            if (curEmp == null)
+                viewModel.IsEdit = false;
+            else
+                viewModel.IsEdit = true;
 
             //DEPARTMENT LIST VIEWBAG
             var departmentList = new Dictionary<string, string>();
             foreach (var department in Employees.Database.Departments)
                 departmentList.Add(department.Did, department.Name);
 
-            
+
             ViewBag.DepartmentList = departmentList;
             return View(viewModel);
         }
@@ -69,26 +78,32 @@ namespace EmpWebSystem.Controllers
             var jsonFile = new StreamReader(Server.MapPath("~/Models/DataBase.json")); //SAVE DataBase.json in ISS
             var jsonString = jsonFile.ReadToEnd();
             Employees = JsonConvert.DeserializeObject<RootModel>(jsonString);
-
+            jsonFile.Close();
             //var newEmp = new Employee();
             //newEmp = viewModel.Employee;
-            jsonFile.Close();
+
 
             var flag = 0;
 
-            
-
-
-                    foreach (var department in Employees.Database.Departments.ToArray())
+            if (viewModel.IsEdit == true)
+            {
+                foreach (var department in Employees.Database.Departments.ToArray())
                 {
+//                    if (department.Employees == null)
+//                    {
+//                        continue;
+//                    }
+
                     foreach (var employee in department.Employees.ToArray())
                     {
                         if (employee.Eid == viewModel.Employee.Eid && department.Did == viewModel.Employee.Did)
                         {
                             employee.Name = viewModel.Employee.Name;
                             employee.Salary = viewModel.Employee.Salary;
-                            flag = 1;
-                            break;
+                            jsonString = JsonConvert.SerializeObject(Employees);
+
+                            System.IO.File.WriteAllText(Server.MapPath("~/Models/DataBase.json"), jsonString);
+                            return RedirectToAction("Index", "Home");
                         }
 
                         if (employee.Eid == viewModel.Employee.Eid && employee.Did != viewModel.Employee.Did)
@@ -100,25 +115,41 @@ namespace EmpWebSystem.Controllers
                     }
                 }
 
+                TempData["shortMessage"] = null;
+            }
 
 
-                if (flag != 1)
+            if (flag != 1)
+            {
+                foreach (var department in Employees.Database.Departments.ToArray())
                 {
-                    foreach (var department in Employees.Database.Departments.ToArray())
+//                    if (department.Employees == null)
+//                    {
+//                        continue;
+//                    }
+
+
                     foreach (var employee in department.Employees.ToArray())
+                    {
                         if (employee.Eid == viewModel.Employee.Eid)
                         {
-                            //ALLERT
+                            TempData["shortMessage"] = "Employee ID Already Exist";
                             return RedirectToAction("Index", "Home");
                         }
+                        else
+                        {
+                            TempData["shortMessage"] = null;
+                        }
+                    }
+                }
 
-                    Employees.Database.Departments[int.Parse(viewModel.Employee.Did) - 1].Employees.Add(viewModel.Employee);
+
+                Employees.Database.Departments[int.Parse(viewModel.Employee.Did) - 1].Employees.Add(viewModel.Employee);
             }
-                
+
 
             jsonString = JsonConvert.SerializeObject(Employees);
             System.IO.File.WriteAllText(Server.MapPath("~/Models/DataBase.json"), jsonString);
-
             return RedirectToAction("Index", "Home");
         }
     }

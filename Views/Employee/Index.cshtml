@@ -1,5 +1,4 @@
-﻿@using EmpWebSystem.Models
-@model EmpWebSystem.ViewModel.EmployeeViewModel
+﻿@model EmpWebSystem.ViewModel.EmployeeViewModel
 @{
     ViewBag.Title = "Employee";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,62 +10,66 @@
 @using (Html.BeginForm("Create", "Employee"))
 {
 
-    if (Model.Employee != null)
+    if (Model.IsEdit == true)
     {
-        <div class=“form­‐group”>
+        @Html.HiddenFor(m => m.IsEdit)
+
+        <div class="form­‐group">
             @Html.LabelFor(m => m.Employee.Did, "Department")
             @Html.DropDownListFor(m => m.Employee.Did,
                 new SelectList(ViewBag.DepartmentList,
-                    "Key", "Value"), new { @class = "form-control" })
+                    "Key", "Value"), new { @class = "form-group" })
         </div>
         @*
             <div class=“form­‐group”>
                 @Html.LabelFor(m => m.Employee.Eid)
-                @Html.TextBoxFor(m => m.Employee.Eid, Model.Employee.Eid,new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.Employee.Eid, Model.Employee.Eid,new { @class = "form-group" })
             </div>*@
 
-        <div class=“form­‐group”>
+        <div class ="form­‐group">
             <label>Employee ID :  @Model.Employee.Eid</label>
         </div>
-        @Html.HiddenFor(m=>m.Employee.Eid)
-        <div class=“form­‐group”>
-            @Html.LabelFor(m => m.Employee.Name)
-            @Html.TextBoxFor(m => m.Employee.Name, Model.Employee.Name, new { @class = "form-control" })
+
+        @Html.HiddenFor(m => m.Employee.Eid)
+        <div class="form­‐group">
+            @Html.LabelFor(m => m.Employee.Name,"Employee Name")
+            @Html.TextBoxFor(m => m.Employee.Name, Model.Employee.Name, new { @class = "form-group" })
         </div>
 
-        <div class=“form­‐group”>
-            @Html.LabelFor(m => m.Employee.Salary)
-            @Html.TextBoxFor(m => m.Employee.Salary, Model.Employee.Salary.ToString(), new { @class = "form-control" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.Employee.Salary,"Employee Salary")
+            @Html.TextBoxFor(m => m.Employee.Salary, Model.Employee.Salary.ToString(), new { @class = "form-group" })
         </div>
     }
     else
     {
-        <div class=“form­‐group”>
-            @Html.LabelFor(m => m.Employee.Did)
+        @Html.HiddenFor(m => m.IsEdit)
+        <div class="form-group">
+            @Html.LabelFor(m => m.Employee.Did,"Department Name")
             @Html.DropDownListFor(m => m.Employee.Did,
                 new SelectList(ViewBag.DepartmentList,
-                    "Key", "Value"), "Select Department", new { @class = "form-control" })
+                    "Key", "Value"), "Select Department", new { @class = "form-group" })
         </div>
 
-        <div class=“form­‐group”>
-            @Html.LabelFor(m => m.Employee.Eid)
-            @Html.TextBoxFor(m => m.Employee.Eid, new { @class = "form-control" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.Employee.Eid,"Employee ID")
+            @Html.TextBoxFor(m => m.Employee.Eid, new { @class = "form-group" })
         </div>
 
-    <div class=“form­‐group”>
-        @Html.LabelFor(m => m.Employee.Name)
-        @Html.TextBoxFor(m => m.Employee.Name, new { @class = "form-control" })
-    </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Employee.Name,"Employee Name")
+            @Html.TextBoxFor(m => m.Employee.Name, new { @class = "form-group" })
+        </div>
 
-    <div class=“form­‐group”>
-        @Html.LabelFor(m => m.Employee.Salary)
-        @Html.TextBoxFor(m => m.Employee.Salary, new { @class = "form-control" })
-    </div>
-}
-
-
+        <div class="form-group">
+            @Html.LabelFor(m => m.Employee.Salary,"Employee Salary")
+            @Html.TextBoxFor(m => m.Employee.Salary, new { @class = "form-group" })
+        </div>
+    }
 
 
 
-<div><button type="submit" class=“btn btn-­primary”>Save</button></div>
+    <br/>
+
+    <div><button type="submit" class=“btn btn-­primary”>Save</button></div>
 }

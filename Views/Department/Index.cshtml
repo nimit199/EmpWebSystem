@@ -1,8 +1,23 @@
-﻿
+﻿@model EmpWebSystem.ViewModel.DepartmentViewModel
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Departmen Index</h2>
+<h2>Add Department</h2>
+@using (Html.BeginForm("Create", "Department"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Department.Did,"Department ID")
+        @Html.TextBoxFor(m => m.Department.Did, "Enter new Department ID", new {@class = "form-group"})
+    </div>
 
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Department.Name,"Department Name")
+        @Html.TextBoxFor(m => m.Department.Name, "Enter new Department Name", new {@class = "form-group"})
+    </div>
+
+    <br/>
+    <div><button type="submit" class=“btn btn-­primary”>Save</button></div>
+}

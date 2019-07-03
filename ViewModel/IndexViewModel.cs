@@ -17,9 +17,16 @@ namespace EmpWebSystem.ViewModel
     public class EmployeeViewModel
     {
         public Employee Employee { get; set; }
+
+        public bool IsEdit { get; set; }
+    }
+
+    public class DepartmentViewModel
+    {
+        public Department Department { get; set; }
     }
 
 
-   
+
 
 }
